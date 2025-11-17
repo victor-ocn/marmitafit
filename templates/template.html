@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- 🔒 Meta tags estáticas baseadas no template -->
+  <meta property="og:title" content="{{title}}" />
+  <meta property="og:description" content="{{description}}" />
+  <meta property="og:image" content="{{image_full_url}}" />
+  <meta property="og:url" content="{{url}}" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <title>{{title}}</title>
+
+  <style>
+    body {
+      text-align: center;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 50px 20px;
+      color: #333;
+    }
+    img {
+      max-width: 300px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    a.button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 35px;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-size: 20px;
+      font-weight: bold;
+      background-color: {{primary_color}};
+    }
+  </style>
+</head>
+
+<body>
+
+  <img src="{{image}}" alt="Imagem" />
+
+  <h1>{{title}}</h1>
+
+  <p>{{description}}</p>
+
+  <a class="button" href="{{whatsapp_link}}">{{button_text}}</a>
+
+  <script>
+    // Redirecionamento automático
+    setTimeout(() => {
+      window.location.href = "{{whatsapp_link}}";
+    }, {{redirect_delay}});
+  </script>
+
+</body>
+</html>
+
