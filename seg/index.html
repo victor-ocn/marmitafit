@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Carregando...</title>
+
+  <!-- js-yaml CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+
+  <style>
+    body {
+      text-align: center;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 50px 20px;
+      color: #333;
+    }
+    img {
+      max-width: 300px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    a.button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 35px;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+
+  <!-- Tags OG criadas dinamicamente -->
+  <script>
+    function setOpenGraph(data) {
+      const head = document.querySelector("head");
+
+      const ogTags = [
+        { property: "og:title", content: data.title },
+        { property: "og:description", content: data.description },
+        { property: "og:image", content: window.location.origin + window.location.pathname + data.image },
+        { property: "og:url", content: window.location.href },
+        { property: "og:type", content: "website" }
+      ];
+
+      ogTags.forEach(tag => {
+        const meta = document.createElement("meta");
+        meta.setAttribute("property", tag.property);
+        meta.setAttribute("content", tag.content);
+        head.appendChild(meta);
+      });
+    }
+  </script>
+
+</head>
+
+<body>
+  <div id="content" style="display:none;">
+    <img id="main-image" src="" alt="Imagem" />
+
+    <h1 id="main-title"></h1>
+
+    <p id="description"></p>
+
+    <a id="whatsapp-button" class="button"></a>
+  </div>
+
+  <p id="loading-text">Carregando…</p>
+
+  <script>
+    async function loadConfig() {
+      const response = await fetch("config.yaml");
+      const yamlText = await response.text();
+      const config = jsyaml.load(yamlText);
+
+      // Preenche dados no HTML
+      document.title = config.title;
+
+      document.getElementById("main-title").innerText = config.title;
+      document.getElementById("main-title").style.color = config.primary_color;
+
+      document.getElementById("description").innerText = config.description;
+
+      document.getElementById("main-image").src = config.image;
+
+      // Constroi o link do WhatsApp
+      const encodedMsg = encodeURIComponent(config.whatsapp_message);
+      const whatsappURL = `https://wa.me/${config.cell_number}?text=${encodedMsg}`;
+
+      const btn = document.getElementById("whatsapp-button");
+      btn.href = whatsappURL;
+      btn.innerText = config.button_text;
+      btn.style.backgroundColor = config.primary_color;
+
+      // Ativa o preview OG
+      setOpenGraph(config);
+
+      // Exibe o conteúdo real após carregamento
+      document.getElementById("loading-text").style.display = "none";
+      document.getElementById("content").style.display = "block";
+
+      // Redirecionamento automático (versão 6)
+      setTimeout(() => {
+        window.location.href = whatsappURL;
+      }, config.redirect_delay_ms);
+    }
+
+    loadConfig();
+  </script>
+
+</body>
+</html>
+
