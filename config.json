@@ -1,13 +1,13 @@
 {
-  "title": "Marmita Fit da Camilla 🍱",
-  "description": "🍲 Marmitas naturais, caseiras e saudáveis. Clique e encomende seu pedido!",
-  "image": "marmita_fit.jpg",
+  "title": "Marmita Fit da Camilla 🍃",
+  "description": "Hoje tem marmita fit fresquinha! 🍲Ideal para quem quer praticidade sem abrir mão do sabor 😍",
+  "image": "image2.jpg",
   "url": "https://victor-ocn.github.io/marmitafit/",
-  "path": "teste",
+  "path": "ter",
   "phone_number": "5521980927987",
-  "message": "Olá! Gostaria de fazer meu pedido de marmita fit!",
+  "message": "Olá! Vi seu post no grupo e gostaria de fazer meu pedido de Marmita Fit!",
   "button_text": "💬 Enviar mensagem no WhatsApp",
   "primary_color": "#25D366",
-  "redirect_delay": 2000
+  "redirect_delay": 1500
 }
 
